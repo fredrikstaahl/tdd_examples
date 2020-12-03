@@ -3,6 +3,7 @@
  */
 trigger OpportunityTrigger on Opportunity(before insert, before update, after insert, after update) {
     if (Trigger.isUpdate && Trigger.isInsert) {
+        OpportunityTriggerHelper.setNameToAccountName(Trigger.new);
     }
 
 }
