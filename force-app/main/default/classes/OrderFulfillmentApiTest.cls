@@ -36,4 +36,23 @@ public with sharing class OrderFulfillmentApiTest {
 
         System.assertEquals(orderAfterUpdate.Status, 'Activated');
     }
+
+    @IsTest
+    static void OrderFulfillmentApiTest_Negative_400() {
+        RestRequest request = new RestRequest();
+
+        String status = 'Activated';
+        String trackingId = 's01kfjamd51';
+
+        String body = '{[{status: "' + status + '", trackingId: “' + '" } ]}';
+        request.requestBody = Blob.valueOf(body);
+        request.httpMethod = 'POST';
+
+        RestContext.request = request;
+        RestResponse response = RestContext.response;
+
+        OrderFulfillmentApi.updateOrders();
+
+        System.assertEquals(400, response.statusCode, 'Should return response code 400');
+    }
 }
