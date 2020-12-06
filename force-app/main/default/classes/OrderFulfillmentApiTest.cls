@@ -26,9 +26,8 @@ public with sharing class OrderFulfillmentApiTest {
         request.httpMethod = 'POST';
 
         RestContext.request = request;
-        RestResponse response = RestContext.response;
-
         OrderFulfillmentApi.updateOrders();
+        RestResponse response = RestContext.response;
 
         System.assertEquals(200, response.statusCode, 'Should return response code 200');
 
